@@ -128,7 +128,7 @@ t6 =    """
         
 
 system_templates = [
-    t1, t5, t2, t3, t6, t4
+    t1, t5, t3, t6, t4
 ]
 
 def gen_system_template():
