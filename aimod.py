@@ -2,9 +2,12 @@
 import os
 from langchain.prompts import ChatPromptTemplate, SystemMessagePromptTemplate, HumanMessagePromptTemplate
 from langchain_openai import ChatOpenAI
+from environs import Env
+env = Env()
+env.read_env('.env')
 
 # Load OpenAI API key from environment variables
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+OPENAI_API_KEY = env("OPENAI_API_KEY")
 
 class AIResponder:
     def __init__(self):

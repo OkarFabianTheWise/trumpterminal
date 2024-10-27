@@ -4,10 +4,13 @@ import os
 import json
 import time
 import random
+from environs import Env
+env = Env()
+env.read_env('.env')
 
 # Load your environment variables
-consumer_key = os.environ.get("X_API_KEY")
-consumer_secret = os.environ.get("X_API_SECRET")
+consumer_key = env("X_API_KEY")
+consumer_secret = env("X_API_SECRET")
 
 # File to store OAuth tokens
 TOKEN_FILE = 'tokens.json'
