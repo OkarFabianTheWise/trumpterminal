@@ -40,8 +40,8 @@ def get_ai_response(text):
 if __name__ == "__main__":
     pass
 
-# # Generate a new quote
-# text = "Generate a quote"
-# quote = get_ai_response(text)
-# # Post the tweet
-# print("Tweeting: ", quote)
+# Generate a new quote
+text = "Generate a quote"
+quote = get_ai_response(text)
+# Post the tweet
+print("Tweeting: ", quote)
