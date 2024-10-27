@@ -120,7 +120,7 @@ async def main():
             # Sleep for a random interval from the list
             wait_time = random.choice(intervals)
             print(f"Waiting for {wait_time // 60} minutes before next tweet.")
-            time.sleep(wait_time)
+            await asyncio.sleep(wait_time) #time.sleep(wait_time)
 
             # Generate a new quote
             quote = responder.generate_response("Generate a quote")
