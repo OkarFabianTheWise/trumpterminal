@@ -1,5 +1,5 @@
 # aimod.py
-import os
+from process_text import remove_quotes
 from templates import gen_system_template
 from langchain.prompts import ChatPromptTemplate, SystemMessagePromptTemplate, HumanMessagePromptTemplate
 from langchain_openai import ChatOpenAI
@@ -33,7 +33,15 @@ class AIResponder:
 # Functional functions to run the AI functionality
 def get_ai_response(text):
     responder = AIResponder()
-    return responder.generate_response(text).strip("'\"")
+    result = responder.generate_response(text).strip("'\"")
+    layer2_text_strip = remove_quotes(result)
+    return layer2_text_strip
 
 if __name__ == "__main__":
     pass
+
+# # Generate a new quote
+# text = "Generate a quote"
+# quote = get_ai_response(text)
+# # Post the tweet
+# print("Tweeting: ", quote)
