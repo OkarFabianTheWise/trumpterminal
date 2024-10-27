@@ -1,10 +1,6 @@
-import asyncio
-import uvicorn
-import aimod
+import asyncio, uvicorn, aimod
 from requests_oauthlib import OAuth1Session
-import os
-import json
-import time
+import os, json
 import random
 from fast_api_app import app
 from environs import Env
@@ -140,4 +136,4 @@ async def couple():
     await asyncio.gather(main(), server())
     
 if __name__ == "__main__":
-    asyncio.run(couple())
+    asyncio.run(main())
