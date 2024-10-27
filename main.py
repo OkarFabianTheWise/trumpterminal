@@ -4,6 +4,7 @@ import os
 import json
 import time
 import random
+import threading
 from environs import Env
 env = Env()
 env.read_env('.env')
@@ -106,7 +107,7 @@ def make_tweet(text):
     except Exception as error:
         print("Error in make_tweet:", error)
 
-if __name__ == "__main__":
+def main():
     try:
         responder = aimod.AIResponder()
         
@@ -128,3 +129,6 @@ if __name__ == "__main__":
     except Exception as error:
         print("Error::runner:", error)
             
+
+if __name__ == "__main__":
+    threading.Thread(target=main).start()
