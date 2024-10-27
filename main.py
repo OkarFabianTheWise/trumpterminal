@@ -104,27 +104,24 @@ def make_tweet(text):
         print("Error in make_tweet:", error)
 
 if __name__ == "__main__":
-    responder = aimod.AIResponder()
-    
-    # Interval options in seconds (25 mins, 30 mins, 70 mins)
-    intervals = [1500, 1800, 4200]
-    
-    # Generate a new quote
-    quote = responder.generate_response("Generate a quote")
-
-    print("Tweeting: ", quote)
-
-    # while True:
-    #     # Generate a new quote
-    #     quote = responder.generate_response("Generate a quote")
-
-    #     print("Tweeting: ", quote)
+    try:
+        responder = aimod.AIResponder()
         
-        # Post the tweet
-        # print("Tweeting: ", quote)
-        # make_tweet(quote)
+        # Interval options in seconds (25 mins, 30 mins, 35 mins, 40 mins)
+        intervals = [1500, 1800, 2100, 2400]
+        
+        while True:
+            # Sleep for a random interval from the list
+            wait_time = random.choice(intervals)
+            print(f"Waiting for {wait_time // 60} minutes before next tweet.")
+            time.sleep(wait_time)
 
-        # # Sleep for a random interval from the list
-        # wait_time = random.choice(intervals)
-        # print(f"Waiting for {wait_time // 60} minutes before next tweet.")
-        # time.sleep(wait_time)
+            # Generate a new quote
+            quote = responder.generate_response("Generate a quote")
+
+            # Post the tweet
+            print("Tweeting: ", quote)
+            make_tweet(quote)
+    except Exception as error:
+        print("Error::runner:", error)
+            
