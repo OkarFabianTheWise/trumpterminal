@@ -1,10 +1,12 @@
+import asyncio
+import uvicorn
 import aimod
 from requests_oauthlib import OAuth1Session
 import os
 import json
 import time
 import random
-import threading
+from fast_api_app import app
 from environs import Env
 env = Env()
 env.read_env('.env')
@@ -107,7 +109,7 @@ def make_tweet(text):
     except Exception as error:
         print("Error in make_tweet:", error)
 
-def main():
+async def main():
     try:
         responder = aimod.AIResponder()
         
@@ -127,8 +129,15 @@ def main():
             print("Tweeting: ", quote)
             make_tweet(quote)
     except Exception as error:
-        print("Error::runner:", error)
+        print("Error::main:", error)
             
+async def server():
+    config = uvicorn.Config("fast_api_app:app", host="0.0.0.0", port=int(os.environ.get("PORT", 5000)), log_level="info")
+    server = uvicorn.Server(config)
+    await server.serve()
 
+async def couple():
+    await asyncio.gather(main(), server())
+    
 if __name__ == "__main__":
-    threading.Thread(target=main).start()
+    asyncio.run(couple())
