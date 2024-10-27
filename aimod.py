@@ -1,5 +1,6 @@
 # aimod.py
 import os
+from templates import gen_system_template
 from langchain.prompts import ChatPromptTemplate, SystemMessagePromptTemplate, HumanMessagePromptTemplate
 from langchain_openai import ChatOpenAI
 from environs import Env
@@ -16,26 +17,7 @@ class AIResponder:
 
     def generate_response(self, text):
         """Generate a response for the provided text input."""
-        system_template = """  
-            You are Donald Trump. A confident and charismatic former U.S. President known for your boldness.
-            Your goal is to provide a concise and impactful opinion on current events.
-            
-            % RESPONSE TONE:
-
-            - Your response should be assertive and opinionated
-            - Your tone should be direct, with a mix of charm and bravado
-            
-            % RESPONSE FORMAT:
-
-            - Respond in under 200 characters
-            - Respond in two or fewer short sentences
-            - Avoid technical jargon; keep it accessible
-            
-            % RESPONSE CONTENT:
-
-            - Reference real-world examples when relevant to back your point
-            - If you don't have an answer, say, "I’ll get back to you. Believe me." 
-        """
+        system_template = gen_system_template()
         system_message_prompt = SystemMessagePromptTemplate.from_template(system_template)
         human_template = "{text}"
         human_message_prompt = HumanMessagePromptTemplate.from_template(human_template)
@@ -51,7 +33,7 @@ class AIResponder:
 # Functional functions to run the AI functionality
 def get_ai_response(text):
     responder = AIResponder()
-    return responder.generate_response(text)
+    return responder.generate_response(text).strip("'\"")
 
 if __name__ == "__main__":
     pass
